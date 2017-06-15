@@ -1,0 +1,17 @@
+{
+    "name": "alankent/module-amp-example",
+    "description": "AMP Example Magento Module (experimental)",
+    "type": "magento2-module",
+    "version": "0.0.1",
+    "require": {
+        "alankent/amp": "0.*"
+    },
+    "autoload": {
+        "files": [
+            "registration.php"
+        ],
+        "psr-4": {
+            "AlanKent\\AmpExample\\": ""
+        }
+    }
+}
