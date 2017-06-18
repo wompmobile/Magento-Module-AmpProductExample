@@ -13,7 +13,7 @@ class Index extends \Magento\Framework\App\Action\Action
     protected $rawResultFactory;
 
     /**
-     * Constructor
+     * Constructor.
      * 
      * @param \Magento\Framework\App\Action\Context $context
      * @param \Magento\Framework\App\Request\Http $request
@@ -42,12 +42,11 @@ class Index extends \Magento\Framework\App\Action\Action
 
         /** @var \Foo\Bar\Block\Popin\Content $block */
         $block = $layout->createBlock(\AlanKent\AmpExample\Block\AmpProductBlock::class);
-        $block->setTemplate('AlanKent_AmpExample::'
-                            . $this->request->getControllerName() . '/'
-                            . $this->request->getActionName() . '.phtml');
+        $block->loadProductWithSku('WH05');
+        $block->setTemplate('AlanKent_AmpExample::index/index.phtml');
 
         $result = $this->rawResultFactory->create();
-        $result->setHeader('Content-Type', 'text/plain');
+        $result->setHeader('Content-Type', 'text/html');
         $result->setContents($block->toHtml());
         return $result;
     }
