@@ -33,4 +33,14 @@ class AmpProductBlock extends \Magento\Framework\View\Element\Template
     public function getProduct() {
         return $this->product;
     }
+
+    public function getImageUrl($product)
+    {
+        $url = "";
+        $attribute = $product->getResource()->getAttribute('image');
+        if ($product->getImage() && $attribute) {
+            $url = $attribute->getFrontend()->getUrl($product);
+        }
+        return $url;
+    }
 }

@@ -4,7 +4,8 @@
     "type": "magento2-module",
     "version": "0.0.1",
     "require": {
-        "alankent/module-amp": "*"
+        "alankent/module-amp": "*",
+        "php": ">=5.2.0"
     },
     "autoload": {
         "files": [
