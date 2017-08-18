@@ -74,7 +74,7 @@ class AmpProductBlock extends \Magento\Framework\View\Element\Template
         }
 
         $galleryInfo = array();
-        $keys = array('url', 'height', 'width');
+        $keys = array('url', 'width', 'height');
 
         foreach ($galleryEntries as $galleryEntry) {
             $values = array();
