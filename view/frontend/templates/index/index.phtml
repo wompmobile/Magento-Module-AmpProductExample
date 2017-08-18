@@ -454,7 +454,7 @@
         "@context": "http://schema.org/",
         "@type": "Product",
         "name": <?php echo json_encode($product->getName()) ?>,
-        "image": "<?php echo $block->getImageUrl($product) ?>",
+        "image": "<?php echo $block->getBaseImageUrl($product) ?>",
         "description": <?php echo json_encode(strip_tags($product->getShortDescription())) ?>
         /* TODO: Based on reviews
         "aggregateRating": {
@@ -550,118 +550,25 @@
       -->
     
     
-  <!-- TODO: This one does not seem to be displayed?!? -->
+  <!-- Product image gallery -->
   <div class="product-gallery">
 
-    <!-- TODO: Product image carousel, per color variation -->
-    <ul class="show" [class]="product.selectedColor == 'green' ? 'show' : 'hide'">
-      <li tabindex="0" role="button">
-        <amp-img on="tap:AMP.setState({product: {selectedSlide: 0}})"
-                  src="/img/green_apple_1_60x40.jpg"
-                  width="60" height="40"
-                  class="selected"
-                  [class]="product.selectedSlide == 0 ? 'selected' : '' ">
-        </amp-img>
-      </li>
-      <li tabindex="1" role="button">
-        <amp-img on="tap:AMP.setState({product: {selectedSlide: 1}})"
-                  src="/img/green_apple_2_60x40.jpg"
-                  width="60" height="40"
-                  [class]="product.selectedSlide == 1 ? 'selected' : '' ">
-        </amp-img>
-      </li>
-    </ul>
-
-    <!-- TODO: Second color variation, only has one image -->
-    <ul class="hide" [class]="product.selectedColor == 'golden' ? 'show' : 'hide'">
-      <li tabindex="0" role="button">
-        <amp-img on="tap:AMP.setState({product: {selectedSlide: 0}})"
-                src="/img/product1_alt1_60x40.jpg"
-                 width="60" height="40"
-                 [class]="product.selectedSlide == 0 ? 'selected' : '' ">
-        </amp-img>
-      </li>
-    </ul>
-
-    <!-- TODO: Third color variation, two images -->
-    <ul class="hide" [class]="product.selectedColor == 'red' ? 'show' : 'hide'">
-      <li tabindex="0" role="button">
-        <amp-img on="tap:AMP.setState({ product: {selectedSlide : 0}})"
-                 src="/img/red_apple_1_60x40.jpg"
-                 width="60" height="40"
-                 [class]="product.selectedSlide == 0 ? 'selected' : '' ">
-        </amp-img>
-      </li>
-      <li tabindex="1" role="button">
-        <amp-img on="tap:AMP.setState({ product: {selectedSlide : 1}})"
-                 src="/img/red_apple_2_60x46.jpg"
-                 width="60" heigt?="40"
-                 [class]="product.selectedSlide == 1 ? 'selected' : '' ">
-        </amp-img>
-      </li>
-    </ul>
-  </div>
-   
-  
-  <!-- TODO: Second gallery, but this one is displayed. -->
-  <div class="product-gallery">
-
-    <amp-carousel id="green-apple-carousel"
+    <amp-carousel id="product-image-carousel"
             width="1024" height="682"
             layout="responsive"
             type="slides"
             [slide]="product.selectedSlide"
             on="slideChange: AMP.setState({product: {selectedSlide: event.index}})"
-            class="show"
-            [class]="product.selectedColor == 'green' ? 'show' : 'hide'">
-      <amp-img src="/img/green_apple_1_1024x682.jpg"
-                width="1024" height="682"
-                layout="responsive" on="tap:gallery-lightbox"
-                role="button" tabindex="0">
-      </amp-img>
-      <amp-img src="/img/green_apple_2_1024x685.jpg"
-                width="1024" height="682"
-                layout="responsive" on="tap:gallery-lightbox"
-                role="button" tabindex="0">
-      </amp-img>
+            class="show">
+      <?php foreach($block->getGalleryInfo() as $imageInfo) {
+        echo '<amp-img src="' . $imageInfo['url'] . '"' .
+                'width="' . strval($imageInfo['width']) . '"' .
+                'height="' . strval($imageInfo['height']) . '"' .
+                'layout="responsive" on="tap:gallery-lightbox"
+                role="button" tabindex="0"></amp-img>';
+      }?>
     </amp-carousel>
 
-    <amp-carousel id="golden-apple-carousel"
-            width="1024" height="682"
-            layout="responsive"
-            type="slides"
-            [slide]="product.selectedSlide"
-            on="slideChange: AMP.setState({product: {selectedSlide: event.index}})"
-            class="hide"
-            [class]="product.selectedColor == 'golden' ? 'show' : 'hide'">
-        <amp-img src="/img/golden_apple1_1024x682.jpg"
-                width="1024" height="682"
-                layout="responsive" on="tap:gallery-lightbox"
-                role="button" tabindex="0">
-        </amp-img>
-    </amp-carousel>
-
-    <amp-carousel id="red-apple-carousel"
-            width="1024" height="682"
-            layout="responsive"
-            type="slides"
-            [slide]="product.selectedSlide"
-            on="slideChange: AMP.setState({product: {selectedSlide: event.index}})"
-            class="hide"
-            [class]="product.selectedColor == 'red' ? 'show' : 'hide'">
-        <amp-img src="/img/red_apple_1_1024x682.jpg"
-                width="1024" height="682"
-                layout="responsive" on="tap:gallery-lightbox"
-                role="button" tabindex="0">
-        </amp-img>
-        <amp-img src="/img/red_apple_2_1024x793.jpg"
-                width="1024" height="682"
-                layout="responsive" on="tap:gallery-lightbox"
-                role="button" tabindex="0">
-        </amp-img>
-    </amp-carousel>
-    
-    
     <!-- Displays zoomed version of image. -->
     <amp-image-lightbox id="gallery-lightbox" layout="nodisplay">
       <div on="tap:gallery-lightbox.close" role="button"
