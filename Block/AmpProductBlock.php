@@ -48,6 +48,10 @@ class AmpProductBlock extends \Magento\Framework\View\Element\Template
         return $this->product;
     }
 
+    public function getPrice() {
+        return number_format($this->product->getPrice(), 2, null, '');
+    }
+
     public function getBaseImageUrl($product)
     {
         $url = "";
