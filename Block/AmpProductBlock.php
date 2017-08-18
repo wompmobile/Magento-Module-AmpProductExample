@@ -23,7 +23,7 @@ class AmpProductBlock extends \Magento\Framework\View\Element\Template
      * @param \Magento\Framework\Escaper $escaper
      * @param \Magento\Framework\UrlInterface $urlBuilder
      * @param \Magento\Framework\View\Element\Template\Context $context
-     * @param \Magento\Catalog\Api\ProductRepositoryInterface $productRepo 
+     * @param \Magento\Catalog\Api\ProductRepositoryInterface $productRepo
      */
     public function __construct(
         \Magento\Framework\Escaper $escaper,

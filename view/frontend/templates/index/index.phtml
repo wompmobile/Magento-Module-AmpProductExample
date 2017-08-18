@@ -25,14 +25,14 @@
     <!-- TODO --> <link rel="canonical" href="https://ampbyexample.com/samples_templates/product_page/">
     <meta name="viewport" content="width=device-width,minimum-scale=1,initial-scale=1">
     <style amp-custom>
-     
+
     article#preview {
       background-color: #f5f5f5;
     }
     amp-carousel {
       margin: 0;
     }
-     
+
     .header {
       position: relative;
       box-shadow: 0 2px 2px 0 rgba(0,0,0,.14),0 3px 1px -2px rgba(0,0,0,.2),0 1px 5px 0 rgba(0,0,0,.12);
@@ -64,7 +64,7 @@
       text-decoration: none;
       line-height: 52px;
     }
-     
+
     .header form {
       padding: 0;
     }
@@ -96,7 +96,7 @@
     }
     .header input[type=search] {
       position: absolute;
-      top: 10px; 
+      top: 10px;
       right: 24px;
       background: #ededed ;
       padding: 0 8px;
@@ -154,7 +154,7 @@
         width: 600px;
       }
     }
-     
+
     .items,
     amp-list.items > div {
       display: flex;
@@ -165,7 +165,7 @@
       flex-grow: 1;
       flex-shrink: 1;
     }
-     
+
     .tile {
       background-color: white;
       width: 120px;
@@ -422,7 +422,7 @@
         line-height: 1.5rem;
         display: none;
         width: 100%;
-        order: 1;  
+        order: 1;
     }
 
     .tabButton[selected]::after {
@@ -470,8 +470,8 @@
     </head>
     <body>
 
-      
-      
+
+
       <!-- TODO: Generate from category tree -->
       <amp-sidebar id="drawermenu" layout="nodisplay">
         <a href="/" class="caps text-decoration-none block p1">Products</a>
@@ -480,9 +480,9 @@
         <a class="caps text-decoration-none block p1" href="/samples_templates/product_browse_page/preview/">Vegetable</a>
         <a class="caps text-decoration-none block p1" href="/samples_templates/product_browse_page/preview/">More</a>
       </amp-sidebar>
-      
-      
-      
+
+
+
       <div class="header">
         <a id="sample-menu" on="tap:drawermenu.toggle">
           <amp-img srcset="<?php echo $block->getViewFileUrl('AlanKent_AmpExample::img/ic_menu_white_1x_web_24dp.png') ?> 1x, <?php echo $block->getViewFileUrl('AlanKent_AmpExample::img/ic_menu_white_2x_web_24dp.png') ?> 2x"
@@ -501,8 +501,8 @@
       <!-- TODO: Product title? -->
       <h2 class="m1"><?php echo $block->escapeHtml($product->getName()) ?></h2>
 
-      
-      
+
+
       <div class="m1">
         <amp-social-share type="twitter"
                           width="30"
@@ -525,8 +525,8 @@
       <!-- Product description -->
       <p id="product-description" class="m1"><?php echo $product->getDescription() ?></p>
 
-      
-      
+
+
 
       <!-- TODO: product video?
       <button class="ampstart-btn caps m1 mb3" on="tap:watch-video-lightbox" >
@@ -547,8 +547,8 @@
         </div>
       </amp-lightbox>
       -->
-    
-    
+
+
   <!-- Product image gallery -->
   <div class="product-gallery">
 
@@ -580,8 +580,8 @@
     </amp-image-lightbox>
 
   </div>
-  
-  
+
+
   <amp-state id="product">
     <script type="application/json">
     {
@@ -617,16 +617,16 @@
     </script>
   </amp-state>
 
-    
-    
+
+
       <p class="price-description">Price:
         <span [text]="product[product.selectedColor].sizes[product.selectedSize]">$1.99</span>
     </p>
 
-    
-    
 
-    
+
+
+
 
       <form id="order" method="POST"
             action-xhr="/samples_templates/product_page/add_to_cart"
@@ -710,8 +710,8 @@
         </div>
       </form>
 
-    
-    
+
+
   <!-- TODO: tabs for ABOUT/SPECS/SIZE, different content. -->
   <amp-selector role="tablist"
   layout="container"
@@ -734,8 +734,8 @@
       class="tabContent p1 p">Size may vary. Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</div>
 </amp-selector>
 
-    
-    
+
+
     <div class="items-center flex">
       <h2 id="related-products" class="m1 inline-block">Related products
       <amp-lightbox id="my-lightbox" layout="nodisplay">
@@ -754,7 +754,7 @@
       <button class="info-button border-none mr1" on="tap:my-lightbox" role="button" tabindex="0">
       </button>
     </div>
-    
+
     <amp-list class="items m1"
               width="auto"
               height="100"
@@ -774,10 +774,10 @@
         </a>
       </template>
     </amp-list>
-  ? 
+  ?
     <button class="ampstart-btn caps m1 mb3" id="listSrcButton" on="tap:AMP.setState({product: {relatedProductsSrc: '/json/more_related_products.json'}})">Show more</button>
-  
-  
+
+
 <!--
   <amp-analytics type="googleanalytics">
     <script type="application/json">
