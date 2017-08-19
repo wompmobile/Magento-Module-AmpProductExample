@@ -12,6 +12,9 @@ class AmpProductBlock extends \Magento\Framework\View\Element\Template
     /** @var \Magento\Catalog\Api\Data\ProductInterface */
     private $product;
 
+    /** @var \Magento\Framework\Data\Form\FormKey */
+    protected $formKey;
+
     /** @var \Magento\Framework\Escaper */
     protected $_escaper;
 
@@ -20,17 +23,20 @@ class AmpProductBlock extends \Magento\Framework\View\Element\Template
 
     /**
      * Constructor
+     * @param \Magento\Framework\Data\Form\FormKey $formKey
      * @param \Magento\Framework\Escaper $escaper
      * @param \Magento\Framework\UrlInterface $urlBuilder
      * @param \Magento\Framework\View\Element\Template\Context $context
      * @param \Magento\Catalog\Api\ProductRepositoryInterface $productRepo
      */
     public function __construct(
+        \Magento\Framework\Data\Form\FormKey $formKey,
         \Magento\Framework\Escaper $escaper,
         \Magento\Framework\UrlInterface $urlBuilder,
         \Magento\Framework\View\Element\Template\Context $context,
         \Magento\Catalog\Api\ProductRepositoryInterface $productRepo
     ) {
+        $this->formKey = $formKey;
         $this->_escaper = $escaper;
         $this->urlBuilder = $urlBuilder;
         parent::__construct($context);
@@ -46,6 +52,10 @@ class AmpProductBlock extends \Magento\Framework\View\Element\Template
 
     public function getProduct() {
         return $this->product;
+    }
+
+    public function getProductId() {
+        return $this->product->getId();
     }
 
     public function getPrice() {
@@ -112,6 +122,10 @@ class AmpProductBlock extends \Magento\Framework\View\Element\Template
         }
 
         return [0, 0];
+    }
+
+    public function getFormKey() {
+        return $this->formKey->getFormKey();
     }
 
 }

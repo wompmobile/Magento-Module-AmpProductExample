@@ -361,21 +361,22 @@
     <p class="price-description">Price: $<?php echo $block->getPrice() ?></p>
 
     <!-- Add to cart action -->
-    <form id="order" method="POST" action-xhr="/samples_templates/product_page/add_to_cart"
-          target="_top" class="flex flex-wrap m1">
+    <form id="order" method="GET" action-xhr="/checkout/cart/add" target="_top" class="flex flex-wrap m1">
         <!-- Quantity -->
         <div class="items-center flex">
             <label for="quantity">Quantity:</label>
-            <input class="quantity" type="number" name="quantity" min="1" max="">
+            <!-- TODO: Get max quantity -->
+            <input class="quantity" type="number" name="qty" min="1" max="" value="1">
         </div>
 
         <!-- Add to cart button -->
         <div class="items-center flex my1">
-            <input type="submit" class="ampstart-btn caps" name="add-to-cart" value="add to cart">
+            <input type="submit" class="ampstart-btn caps">
         </div>
 
         <!-- Hidden fields -->
-        <input type="hidden" name="sku" value="<?php echo json_encode($product->getSku()) ?>">
+        <input type="hidden" name="product" value="<?php echo $block->escapeHtml($block->getProductId()) ?>">
+        <input type="hidden" name="form_key" value="<?php echo $block->escapeHtml($block->getFormKey()) ?>">
         <div submit-error>
           <template type="amp-mustache">
             Error! Looks like something went wrong with your shopping cart, please try to add an item again. {{error}}
