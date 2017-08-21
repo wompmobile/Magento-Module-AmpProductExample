@@ -88,7 +88,7 @@ class AmpProductBlock extends \Magento\Framework\View\Element\Template
 
         foreach ($galleryEntries as $galleryEntry) {
             $values = array();
-            if (!$galleryEntry->isDisabled()) {
+            if (!$galleryEntry->isDisabled() && $this->isImage($galleryEntry)) {
                 $values[] = $this->getImageUrl($galleryEntry);
 
                 $imageDimensions = $this->getImageDimensions($galleryEntry);
@@ -100,6 +100,16 @@ class AmpProductBlock extends \Magento\Framework\View\Element\Template
         }
 
         return $galleryInfo;
+    }
+
+    public function isImage($galleryEntry)
+    {
+        $mediaDir = $this->_filesystem->getDirectoryRead(DirectoryList::MEDIA);
+
+        $relativePath = 'catalog/product' . $galleryEntry->getFile();
+        $absolutePath = $mediaDir->getAbsolutePath($relativePath);
+
+        return @is_array(getimagesize($absolutePath));
     }
 
     public function getImageUrl($galleryEntry)
