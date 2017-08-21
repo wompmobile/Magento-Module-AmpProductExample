@@ -77,7 +77,8 @@ class AmpProductBlock extends \Magento\Framework\View\Element\Template
         return $this->_escaper->escapeHtml($html, $allowedTags);
     }
 
-    public function getGalleryInfo() {
+    public function getGalleryInfo()
+    {
         $galleryEntries = $this->product->getMediaGalleryEntries();
         if ($galleryEntries === null) {
             return array();
@@ -86,6 +87,7 @@ class AmpProductBlock extends \Magento\Framework\View\Element\Template
         $galleryInfo = array();
         $keys = array('url', 'width', 'height');
 
+        // Build array of product images
         foreach ($galleryEntries as $galleryEntry) {
             $values = array();
             if (!$galleryEntry->isDisabled() && $this->isImage($galleryEntry)) {
@@ -97,6 +99,18 @@ class AmpProductBlock extends \Magento\Framework\View\Element\Template
 
                 $galleryInfo[] = array_combine($keys, $values);
             }
+        }
+
+        // Provide placeholder image if no gallery images
+        if (count($galleryInfo) < 1) {
+            $values = array();
+            $values[] = $this->getViewFileUrl('AlanKent_AmpExample::img/placeholder.jpg');
+
+            $imageDimensions = $this->getImageDimensions($galleryEntry);
+            $values[] = $imageDimensions[0];
+            $values[] = $imageDimensions[1];
+
+            $galleryInfo[] = array_combine($keys, $values);
         }
 
         return $galleryInfo;
