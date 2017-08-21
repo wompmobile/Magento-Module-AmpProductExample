@@ -277,7 +277,7 @@
         "@context": "http://schema.org/",
         "@type": "Product",
         "name": <?php echo json_encode($product->getName()) ?>,
-        "image": "<?php echo $block->getBaseImageUrl($product) ?>",
+        "image": "<?php echo $block->getProductImageUrl() ?>",
         "description": <?php echo json_encode(strip_tags($product->getShortDescription())) ?>
     }
     </script>
@@ -339,7 +339,7 @@
             height="682"
             layout="responsive"
             type="slides"
-            class="show"><?php foreach($block->getGalleryInfo() as $imageInfo): ?>
+            class="show"><?php foreach($block->getProductGalleryInfo() as $imageInfo): ?>
                 <amp-img src="<?php echo $imageInfo['url'] ?>"
                     width="<?php echo strval($imageInfo['width']) ?>"
                     height="<?php echo strval($imageInfo['height']) ?>"
@@ -358,7 +358,7 @@
     </div>
 
     <!-- Price -->
-    <p class="price-description">Price: $<?php echo $block->getPrice() ?></p>
+    <p class="price-description">Price: $<?php echo $block->getProductPrice() ?></p>
 
     <!-- Add to cart action -->
     <form id="order" method="GET" action-xhr="/checkout/cart/add" target="_top" class="flex flex-wrap m1">

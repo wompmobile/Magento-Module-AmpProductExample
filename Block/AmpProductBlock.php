@@ -58,16 +58,16 @@ class AmpProductBlock extends \Magento\Framework\View\Element\Template
         return $this->product->getId();
     }
 
-    public function getPrice() {
+    public function getProductPrice() {
         return number_format($this->product->getPrice(), 2, null, '');
     }
 
-    public function getBaseImageUrl($product)
+    public function getProductImageUrl()
     {
         $url = "";
-        $attribute = $product->getResource()->getAttribute('image');
-        if ($product->getImage() && $attribute) {
-            $url = $attribute->getFrontend()->getUrl($product);
+        $attribute = $this->product->getResource()->getAttribute('image');
+        if ($this->product->getImage() && $attribute) {
+            $url = $attribute->getFrontend()->getUrl($this->product);
         }
         return $url;
     }
@@ -77,7 +77,7 @@ class AmpProductBlock extends \Magento\Framework\View\Element\Template
         return $this->_escaper->escapeHtml($html, $allowedTags);
     }
 
-    public function getGalleryInfo()
+    public function getProductGalleryInfo()
     {
         $galleryEntries = $this->product->getMediaGalleryEntries();
         if ($galleryEntries === null) {
