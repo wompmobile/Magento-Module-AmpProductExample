@@ -6,6 +6,9 @@ use Magento\Framework\App\Filesystem\DirectoryList;
 
 class AmpProductBlock extends \Magento\Framework\View\Element\Template
 {
+    /** @var \Magento\Catalog\Model\Category */
+    protected $categoryModel;
+
     /** @var \Magento\Catalog\Api\ProductRepositoryInterface */
     private $productRepo;
 
@@ -27,6 +30,7 @@ class AmpProductBlock extends \Magento\Framework\View\Element\Template
      * @param \Magento\Framework\Escaper $escaper
      * @param \Magento\Framework\UrlInterface $urlBuilder
      * @param \Magento\Framework\View\Element\Template\Context $context
+     * @param \Magento\Catalog\Model\Category $categoryModel
      * @param \Magento\Catalog\Api\ProductRepositoryInterface $productRepo
      */
     public function __construct(
@@ -34,12 +38,14 @@ class AmpProductBlock extends \Magento\Framework\View\Element\Template
         \Magento\Framework\Escaper $escaper,
         \Magento\Framework\UrlInterface $urlBuilder,
         \Magento\Framework\View\Element\Template\Context $context,
+        \Magento\Catalog\Model\Category $categoryModel,
         \Magento\Catalog\Api\ProductRepositoryInterface $productRepo
     ) {
         $this->formKey = $formKey;
         $this->_escaper = $escaper;
         $this->urlBuilder = $urlBuilder;
         parent::__construct($context);
+        $this->categoryModel = $categoryModel;
         $this->productRepo = $productRepo;
     }
 
@@ -70,6 +76,82 @@ class AmpProductBlock extends \Magento\Framework\View\Element\Template
             $url = $attribute->getFrontend()->getUrl($this->product);
         }
         return $url;
+    }
+
+    private function getCategoriesInfo()
+    {
+        $category = $this->categoryModel;
+        $tree = $category->getTreeModel()->load();
+        $ids = $tree->getCollection()->getAllIds();
+
+        $categoriesInfo = array();
+        $keys = array('id', 'name', 'url', 'level', 'children');
+
+        foreach ($ids as $id) {
+            if ($id == \Magento\Catalog\Model\Category::TREE_ROOT_ID) {
+                continue;
+            }
+
+            $category->load($id);
+            $level = $category->getLevel();
+
+            $values = array();
+            $values[] = $category->getId();
+            $values[] = $category->getName();
+            $values[] = $level > 1 ? $category->getCategoryIdUrl() : "";
+            $values[] = $level;
+
+            // Why does getAllChildren() include the id of self?
+            $children = $category->getAllChildren(true);
+            unset($children[array_search($category->getId(), $children)]);
+            $values[] = $children;
+
+            $categoriesInfo[] = array_combine($keys, $values);
+        }
+
+        return $categoriesInfo;
+    }
+
+    private function generateChildCategoriesHTML($categoriesInfo, $children, $level)
+    {
+        if (!$children) {
+            return "";
+        }
+
+        $html = "";
+
+        foreach ($categoriesInfo as $categoryInfo) {
+            if (in_array($categoryInfo['id'], $children) && $categoryInfo['level'] == $level) {
+                $html .= '<ul class="categories">' .
+                         '<li class="category">' .
+                         '<a class="category-link" href="' . $categoryInfo['url']  . '">' . $categoryInfo['name'] . '</a>' .
+                         $this->generateChildCategoriesHTML($categoriesInfo, $categoryInfo['children'], $level+1) .
+                         '</li>' .
+                         '</ul>';
+            }
+        }
+
+        return $html;
+    }
+
+    // TODO: This is not efficient
+    public function generateCategoriesHTML()
+    {
+        $html = "";
+        $categoriesInfo = $this->getCategoriesInfo();
+
+        foreach ($categoriesInfo as $categoryInfo) {
+            if ($categoryInfo['level'] == 1) {
+                $html .= '<ul class="categories">' .
+                         '<li class="category">' .
+                         $categoryInfo['name'] .
+                         $this->generateChildCategoriesHTML($categoriesInfo, $categoryInfo['children'], 2) .
+                         '</li>' .
+                         '</ul>';
+            }
+        }
+
+        return $html;
     }
 
     public function escapeHtml($html, $allowedTags = NULL)
