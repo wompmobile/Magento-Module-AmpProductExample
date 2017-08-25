@@ -2,272 +2,180 @@
 <?php
     $product = $block->getProduct();
 ?>
-<html amp>
+<html ⚡>
 <head>
     <meta charset="utf-8">
+
     <script async src="https://cdn.ampproject.org/v0.js"></script>
 
     <script async custom-element="amp-carousel" src="https://cdn.ampproject.org/v0/amp-carousel-0.1.js"></script>
-    <script async custom-template="amp-mustache" src="https://cdn.ampproject.org/v0/amp-mustache-0.1.js"></script>
-    <script async custom-element="amp-social-share" src="https://cdn.ampproject.org/v0/amp-social-share-0.1.js"></script>
-    <script async custom-element="amp-lightbox" src="https://cdn.ampproject.org/v0/amp-lightbox-0.1.js"></script>
-    <script async custom-element="amp-image-lightbox" src="https://cdn.ampproject.org/v0/amp-image-lightbox-0.1.js"></script>
     <script async custom-element="amp-form" src="https://cdn.ampproject.org/v0/amp-form-0.1.js"></script>
+    <script async custom-element="amp-image-lightbox" src="https://cdn.ampproject.org/v0/amp-image-lightbox-0.1.js"></script>
     <script async custom-element="amp-sidebar" src="https://cdn.ampproject.org/v0/amp-sidebar-0.1.js"></script>
-    <script async custom-element="amp-selector" src="https://cdn.ampproject.org/v0/amp-selector-0.1.js"></script>
+    <script async custom-element="amp-social-share" src="https://cdn.ampproject.org/v0/amp-social-share-0.1.js"></script>
+    <script async custom-template="amp-mustache" src="https://cdn.ampproject.org/v0/amp-mustache-0.1.js"></script>
 
-    <!-- TODO --> <link rel="canonical" href="https://ampbyexample.com/samples_templates/product_page/">
+    <!-- TODO: Replace with canonical product link -->
+    <link rel="canonical" href="/amp/">
+
+    <link href="https://fonts.googleapis.com/css?family=Roboto" rel="stylesheet">
+
     <meta name="viewport" content="width=device-width,minimum-scale=1,initial-scale=1">
+
     <style amp-custom>
-
-    amp-carousel {
-      margin: 0;
-    }
-    amp-carousel .selected {
-      border: solid 2px red;
+    body {
+        font-family: "Roboto", sans-serif;
     }
 
     .header {
-      position: relative;
-      box-shadow: 0 2px 2px 0 rgba(0,0,0,.14),0 3px 1px -2px rgba(0,0,0,.2),0 1px 5px 0 rgba(0,0,0,.12);
-      padding-top: 52px;
+        background-color: #0696b7;
+        position: relative;
+        box-shadow: 0 2px 2px 0 rgba(0,0,0,0.14), 0 3px 1px -2px rgba(0,0,0,0.2), 0 1px 5px 0 rgba(0,0,0,0.12);
+        padding-top: 52px;
     }
-    .header {
-      background-color: #607D8B;
-    }
+
     .header #sample-menu {
-      position:absolute;
-      top:0;
-      left: 0;
-      font-size: 18px;
-      font-weight: 700;
-      color: white;
-      text-transform: uppercase;
-      padding: 13px;
+        position: absolute;
+        top: 0;
+        left: 0;
+        font-size: 18px;
+        font-weight: 700;
+        color: white;
+        padding: 13px;
     }
+
     .header #sample-logo {
-      position:absolute;
-      top:0;
-      left:36px;
-      font-size: 18px;
-      font-weight: 400;
-      color: white;
-      text-transform: uppercase;
-      margin: 0 16px;
-      height: 32px;
-      text-decoration: none;
-      line-height: 52px;
-    }
-    .header form {
-      padding: 0;
-    }
-    .header input::-webkit-search-decoration,
-    .header input::-webkit-search-cancel-button {
-      display: none;
-    }
-    .header input[type=submit] {
-      position:absolute;
-      top:10px; right:8px;
-      background-color: #eb407a;
-      background-position: center;
-      background-repeat: no-repeat;
-      background-image: -webkit-image-set(
-        url('/img/ic_search_white_1x_web_24dp.png') 1x,
-        url('/img/ic_search_white_2x_web_24dp.png') 2x
-      );
-      border: 0 none;
-      height: 32px;
-      width: 36px;
-      -webkit-appearance: none;
-      border-radius: 0;
-      -moz-border-top-right-radius: 4px;
-      -moz-border-bottom-right-radius: 4px;
-      -webkit-border-top-right-radius: 4px;
-      -webkit-border-bottom-right-radius: 4px;
-      border-top-right-radius: 4px;
-      border-bottom-right-radius: 4px;
-    }
-    .header input[type=search] {
-      position: absolute;
-      top: 10px;
-      right: 24px;
-      background: #ededed ;
-      padding: 0 8px;
-      width: 20vw;
-      height: 32px;
-      font-family: inherit;
-      font-size: 100%;
-      -moz-box-sizing: border-box;
-      -webkit-box-sizing: border-box;
-      box-sizing: border-box;
-      -webkit-appearance: none;
-      border: solid 0px #ccc;
-      border-radius: 0;
-      -moz-border-top-left-radius: 4px;
-      -moz-border-bottom-left-radius: 4px;
-      -webkit-border-top-left-radius: 4px;
-      -webkit-border-bottom-left-radius: 4px;
-      border-top-left-radius: 4px;
-      border-bottom-left-radius: 4px;
-      -webkit-transition: all .9s;
-      -moz-transition: all .9s;
-      transition: all .9s ease;
-    }
-    .header input[type=search]:focus {
-      box-sizing: border-box;
-      width: 80vw;
-      max-width: 700px;
-      height: 32px;
-      background-color: #fff;
-      border-color: #eb407a;
-      -webkit-box-shadow: 0 0 5px rgba(109,207,246,.5);
-      -moz-box-shadow: 0 0 5px rgba(109,207,246,.5);
-      box-shadow: 0 0 5px rgba(109,207,246,.5);
-      outline:none;
-    }
-    .header input:-moz-placeholder,
-    .header input::-webkit-input-placeholder {
-      color: #999;
-    }
-    .header input:focus + #sample-logo {
-      visibility: hidden;
-      opacity: 0;
-      transition: visibility 0s 0.7s, opacity 0.7s ease;
-    }
-    .header input + #sample-logo {
-      visibility: visible;
-      opacity: 1;
-      transition: opacity 1.5s ease;
+        position: absolute;
+        top: 0;
+        left: 36px;
+        font-size: 20px;
+        font-weight: 400;
+        color: white;
+        margin: 0 16px;
+        height: 32px;
+        text-decoration: none;
+        line-height: 52px;
     }
 
-    .items {
-      display: flex;
-      justify-content:space-around;
-      flex-wrap: wrap;
-    }
-    .item {
-      flex-grow: 1;
-      flex-shrink: 1;
+    #drawermenu {
+        color: black;
+        padding-left: 16px;
+        padding-right: 16px;
     }
 
-    .tile {
-      background-color: white;
-      width: 120px;
-      height: 200px;
-      display: block;
-      margin: 8px;
-      -webkit-tap-highlight-color: #eee;
-      max-width: 200px;
-    }
-    @media (max-width: 500px) {
-      .items .tile {
-        width: 150px;
-        height: 200px;
-      }
-    }
-    .tile:active {
-      background-color: #eee;
-    }
-    .tile p {
-      margin: 0;
-      padding: 0 8px;
-      font-size: 14px;
-      line-height:20px;
-    }
-    .tile .name {
-      margin-top: 8px;
-    }
-    .tile .price {
-      margin-bottom: 8px;
-    }
-    .tile .price,
-    .tile .star {
-      color: black;
+    #drawermenu h2 {
+        margin-top: 24px;
+        font-size: 20px;
     }
 
-    #product-description {
-      clear: both;
+    #drawermenu ul.categories {
+        padding-left: 0;
+        list-style-type: none;
     }
 
-    amp-lightbox {
-      background: rgba(0,0,0,0.8);
-      width: 100%;
-      height: 100%;
-      position: absolute;
+    #drawermenu ul.categories ul {
+        margin-top: 1ex;
+        padding-left: 1em;
     }
 
-    .price-description {
-      color: grey;
-      font-weight: 400;
-      margin-top: 24px;
-      margin-bottom: 16px;
-      padding: 0 16px;
-    }
-    .product-gallery > ul {
-      margin: 0;
-      padding: 0;
-      float: left;
-      list-style: none;
-      line-height: 0;
-    }
-    .product-gallery > ul > li {
-      cursor: pointer;
-      margin: 0 1em 1em 1em;
-      opacity: 1;
-      will-change: opacity;
-      transition: all 0.3s cubic-bezier(.25,.8,.25,1);
-    }
-    .product-gallery > ul > li:active {
-      opacity: 0.5;
-    }
-    .product-gallery > ul > li:focus {
-      outline: none;
-    }
-    .product-gallery amp-img:focus {
-      outline: none;
+    #drawermenu ul a {
+        text-decoration: none;
+        color: darkblue;
     }
 
-    form#order label {
-      display: inline;
-      font-weight: 500;
-      font-size: 16px;
-      margin: 0;
-    }
-    form#order .button {
-      width: 100%;
-      max-width: 400px;
-      align-self: center;
-      margin: 16px 20%;
-      box-sizing: border-box;
-    }
-    form#order input.quantity {
-      width: 4em;
+    #drawermenu .drawermenu-button {
+        z-index: 2;
+        position: fixed;
+        right: 6px;
+        top: 6px;
+        font-size: 24px;
+        line-height: 24px;
+        background-color: transparent;
+        border: 0;
     }
 
-    .hide {
-      display: none;
-    }
-    .show {
-      display: block;
+    .contents {
+        padding: 0 10px;
     }
 
-    @media (max-width: 1024px) {
-      .product-gallery > ul {
-        display: none;
-      }
+    .product-title {
+        margin-top: 16px;
+        margin-bottom: 8px;
     }
 
-    .lightbox {
-      width: 100%;
-      height: 100%;
-      display: flex;
-      align-items: center;
+    .product-field {
+        margin-top: 8px;
+        margin-bottom: 8px;
+    }
+
+    .product-description {
+    }
+
+    .product-gallery {
+        margin-top: 12px;
+        margin-bottom: 12px;
     }
 
     .close-gallery-button {
-      z-index: 1;
-      position: absolute;
-      right: 0;
+        z-index: 1;
+        position: absolute;
+        right: 6px;
+        top: 6px;
+        font-size: 24px;
+        line-height: 24px;
+        background-color: black;
+        color: white;
+        border: 1px solid gray;
+    }
+
+    amp-image-lightbox img {
+        object-fit: contain;
+        background: rgba(0,0,0,0.9);
+    }
+
+    .product-price {
+        font-weight: 600;
+        font-size: 18px;
+    }
+
+    #add-to-cart label {
+        display: inline-block;
+        margin: 0;
+    }
+
+    #add-to-cart .quantity {
+        font-size: 16px;
+        text-align: right;
+        height: 24px;
+        width: 2em;
+        display: inline-block;
+        margin-left: 6px;
+        padding-right: 4px;
+    }
+
+    #add-to-cart .button {
+        font-size: 16px;
+        background-color: #0696b7;
+        color: white;
+        border: 1px solid black;
+        padding: 6px 12px;
+        text-align: center;
+        display: inline-block;
+        margin-left: 6px;
+    }
+
+    .hide {
+        display: none;
+    }
+
+    .show {
+        display: block;
+    }
+
+    #social {
+        position: absolute;
+        top: calc(100vh - 22px - 12px);
+        right: 12px;
     }
     </style>
 
@@ -286,100 +194,122 @@
     </head>
     <body>
 
-    <!-- Categories -->
-    <amp-sidebar id="drawermenu" layout="nodisplay">
-        <p>Categories</p>
-        <?php echo $block->generateCategoriesHTML() ?>
-    </amp-sidebar>
+        <!-- Categories -->
+        <amp-sidebar id="drawermenu" layout="nodisplay">
+            <h2>Categories</h2>
+            <?php echo $block->generateCategoriesHTML() ?>
+            <button class="drawermenu-button"
+                    on="tap:drawermenu.toggle"
+                    role="button"
+                    tabindex="0">×</button>
+        </amp-sidebar>
 
-    <!-- Drawer icon -->
-    <div class="header">
-        <a id="sample-menu" on="tap:drawermenu.toggle">
-            <amp-img srcset="<?php
-                echo $block->getViewFileUrl('AlanKent_AmpExample::img/ic_menu_white_1x_web_24dp.png')
-            ?> 1x, <?php
-                echo $block->getViewFileUrl('AlanKent_AmpExample::img/ic_menu_white_2x_web_24dp.png')
-            ?> 2x" width="24" height="24" alt="navigation"></amp-img>
-        </a>
-        <a id="sample-logo" href="/amp/">Magento AMP Demo</a>
-    </div>
+        <!-- Drawer icon -->
+        <div class="header">
+            <a id="sample-menu" on="tap:drawermenu.toggle">
+                <amp-img srcset="<?php
+                        echo $block->getViewFileUrl('AlanKent_AmpExample::img/ic_menu_white_1x_web_24dp.png')
+                    ?> 1x, <?php
+                        echo $block->getViewFileUrl('AlanKent_AmpExample::img/ic_menu_white_2x_web_24dp.png')
+                    ?> 2x" width="24" height="24" alt="navigation">
+                </amp-img>
+            </a>
+            <a id="sample-logo" href="/amp/">
+                Magento &amp; WompMobile &hearts; AMP
+            </a>
+        </div>
 
-    <!-- Product title -->
-    <h2 class="m1"><?php echo $block->escapeHtml($product->getName()) ?></h2>
+        <div class="contents">
 
-    <!-- Social links -->
-    <div class="m1">
-        <amp-social-share type="twitter"
-                          width="30"
-                          height="22"></amp-social-share>
-        <amp-social-share type="facebook"
-                          width="30"
-                          height="22"
-                          data-attribution="254325784911610"></amp-social-share>
-        <amp-social-share type="gplus"
-                          width="30"
-                          height="22"></amp-social-share>
-        <amp-social-share type="email"
-                          width="30"
-                          height="22"></amp-social-share>
-        <amp-social-share type="pinterest"
-                          width="33"
-                          height="22"></amp-social-share>
-    </div>
+            <!-- Product title -->
+            <h2 class="product-title product-field">
+                <?php echo $block->escapeHtml($product->getName()) ?>
+            </h2>
 
-    <!-- Product description -->
-    <p id="product-description" class="m1"><?php echo $product->getDescription() ?></p>
+            <!-- Product tagline -->
+            <p class="product-tagline product-field">
+                <?php echo $block->escapeHtml(strip_tags($product->getShortDescription())) ?>
+            </p>
 
-    <!-- Product image gallery -->
-    <div class="product-gallery">
-        <amp-carousel id="product-image-carousel"
-            width="1024"
-            height="682"
-            layout="responsive"
-            type="slides"
-            class="show"><?php foreach($block->getProductGalleryInfo() as $imageInfo): ?>
-                <amp-img src="<?php echo $imageInfo['url'] ?>"
-                    width="<?php echo strval($imageInfo['width']) ?>"
-                    height="<?php echo strval($imageInfo['height']) ?>"
-                    layout="responsive" on="tap:gallery-lightbox"
-                    role="button" tabindex="0"></amp-img>
-                <?php endforeach; ?>
-        </amp-carousel>
+            <!-- Product image gallery -->
+            <amp-carousel id="product-gallery"
+                height="320"
+                layout="fixed-height"
+                type="slides"
+                class="show"><?php foreach($block->getProductGalleryInfo() as $imageInfo): ?>
+                        <amp-img src="<?php echo $imageInfo['url'] ?>"
+                                 width="<?php echo strval($imageInfo['width']) ?>"
+                                 height="<?php echo strval($imageInfo['height']) ?>"
+                                 layout="responsive"
+                                 on="tap:gallery-lightbox"
+                                 role="button"
+                                 tabindex="0"
+                                 alt="Product Image">
+                        </amp-img>
+                    <?php endforeach; ?>
+            </amp-carousel>
 
-        <!-- Zoom image -->
-        <amp-image-lightbox id="gallery-lightbox" layout="nodisplay">
-            <div on="tap:gallery-lightbox.close" role="button" tabindex="0">
-                <button class="ampstart-btn caps m2 close-gallery-button" on="tap:gallery-lightbox.close"
-                        role="button" tabindex="0">Close</button>
+            <!-- Zoom image -->
+            <amp-image-lightbox id="gallery-lightbox" layout="nodisplay">
+                <div on="tap:gallery-lightbox.close" role="button" tabindex="0">
+                    <button class="close-gallery-button"
+                            on="tap:gallery-lightbox.close"
+                            role="button"
+                            tabindex="0">×</button>
+                </div>
+            </amp-image-lightbox>
+
+            <!-- Product price -->
+            <p class="product-price product-field">
+                $<?php echo $block->getProductPrice() ?>
+            </p>
+
+            <!-- Product description -->
+            <p class="product-description product-field">
+                <?php echo $block->escapeHtml(strip_tags($product->getDescription())) ?>
+            </p>
+
+            <!-- Add to cart action -->
+            <form class="product-field" id="add-to-cart" method="GET" action-xhr="/checkout/cart/add/" target="_top">
+                <!-- Quantity -->
+                <label for="quantity">Quantity:</label>
+                <!-- TODO: Get max quantity -->
+                <input class="quantity" type="number" name="qty" min="1" value="1">
+
+                <!-- Add to cart button -->
+                <input type="submit" class="button" value="Add to Cart">
+
+                <!-- Hidden fields -->
+                <input type="hidden" name="product" value="<?php echo $block->escapeHtml($block->getProductId()) ?>">
+                <input type="hidden" name="form_key" value="<?php echo $block->escapeHtml($block->getFormKey()) ?>">
+                <div submit-error>
+                    <template type="amp-mustache">
+                        Error! Looks like something went wrong with your shopping cart, please try to add an item again. {{error}}
+                    </template>
+                </div>
+            </form>
+
+            <!-- Social links -->
+            <div id="social">
+                <amp-social-share type="twitter"
+                                  width="30"
+                                  height="22"></amp-social-share>
+                <amp-social-share type="facebook"
+                                  width="30"
+                                  height="22"
+                                  data-attribution="254325784911610"></amp-social-share>
+                <amp-social-share type="gplus"
+                                  width="30"
+                                  height="22"></amp-social-share>
+                <amp-social-share type="email"
+                                  width="30"
+                                  height="22"></amp-social-share>
+                <amp-social-share type="pinterest"
+                                  width="33"
+                                  height="22"></amp-social-share>
             </div>
-        </amp-image-lightbox>
-    </div>
 
-    <!-- Price -->
-    <p class="price-description">Price: $<?php echo $block->getProductPrice() ?></p>
-
-    <!-- Add to cart action -->
-    <form id="order" method="GET" action-xhr="/checkout/cart/add" target="_top" class="flex flex-wrap m1">
-        <!-- Quantity -->
-        <div class="items-center flex">
-            <label for="quantity">Quantity:</label>
-            <!-- TODO: Get max quantity -->
-            <input class="quantity" type="number" name="qty" min="1" max="" value="1">
         </div>
 
-        <!-- Add to cart button -->
-        <div class="items-center flex my1">
-            <input type="submit" class="ampstart-btn caps">
-        </div>
-
-        <!-- Hidden fields -->
-        <input type="hidden" name="product" value="<?php echo $block->escapeHtml($block->getProductId()) ?>">
-        <input type="hidden" name="form_key" value="<?php echo $block->escapeHtml($block->getFormKey()) ?>">
-        <div submit-error>
-          <template type="amp-mustache">
-            Error! Looks like something went wrong with your shopping cart, please try to add an item again. {{error}}
-          </template>
-        </div>
-      </form>
     </body>
 </html>
