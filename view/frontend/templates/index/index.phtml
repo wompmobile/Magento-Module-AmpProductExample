@@ -15,8 +15,7 @@
     <script async custom-element="amp-social-share" src="https://cdn.ampproject.org/v0/amp-social-share-0.1.js"></script>
     <script async custom-template="amp-mustache" src="https://cdn.ampproject.org/v0/amp-mustache-0.1.js"></script>
 
-    <!-- TODO: Replace with canonical product link -->
-    <link rel="canonical" href="/amp/">
+    <link rel="canonical" href="/amp/?sku=<?php echo $_GET["sku"] ?>">
 
     <link href="https://fonts.googleapis.com/css?family=Roboto" rel="stylesheet">
 
@@ -289,7 +288,7 @@
             </p>
 
             <!-- Add to cart action -->
-            <form class="product-field" id="add-to-cart" method="GET" action-xhr="/checkout/cart/add/" target="_top">
+            <form class="product-field" id="add-to-cart" method="GET" action="/checkout/cart/add/" target="_top">
                 <!-- Quantity -->
                 <label for="quantity">Quantity:</label>
                 <!-- TODO: Get max quantity -->
