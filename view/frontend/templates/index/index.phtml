@@ -278,14 +278,14 @@
                 </div>
             </amp-image-lightbox>
 
-            <!-- Product price -->
-            <p class="product-price product-field">
-                $<?php echo $block->getProductPrice() ?>
-            </p>
-
             <!-- Product description -->
             <p class="product-description product-field">
                 <?php echo $block->escapeHtml(strip_tags($product->getDescription())) ?>
+            </p>
+
+            <!-- Product price -->
+            <p class="product-price product-field">
+                $<?php echo $block->getProductPrice() ?>
             </p>
 
             <!-- Add to cart action -->
