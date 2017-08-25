@@ -42,7 +42,7 @@ class Index extends \Magento\Framework\App\Action\Action
 
         /** @var \Foo\Bar\Block\Popin\Content $block */
         $block = $layout->createBlock(\AlanKent\AmpExample\Block\AmpProductBlock::class);
-        $block->loadProductWithSku('WH05');
+        $block->getProductParam();
         $block->setTemplate('AlanKent_AmpExample::index/index.phtml');
 
         $result = $this->rawResultFactory->create();

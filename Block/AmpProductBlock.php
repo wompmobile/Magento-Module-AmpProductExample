@@ -49,7 +49,12 @@ class AmpProductBlock extends \Magento\Framework\View\Element\Template
         $this->productRepo = $productRepo;
     }
 
-    public function loadProductWithSku($sku) {
+    public function getProductParam() {
+        $sku = $_GET["sku"];
+        if ($sku === "") {
+            throw new \Exception("Product SKU missing.");
+        }
+
         $this->product = $this->productRepo->get($sku);
         if ($this->product === null) {
             throw new \Exception("Failed to fetch product with SKU '$sku'.");
