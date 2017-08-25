@@ -96,10 +96,12 @@
 
     .contents {
         padding: 0 10px;
+        display: flex;
+        flex-direction: column;
     }
 
     .product-title {
-        margin-top: 16px;
+        margin-top: 20px;
         margin-bottom: 8px;
     }
 
@@ -172,10 +174,27 @@
         display: block;
     }
 
-    #social {
-        position: absolute;
-        top: calc(100vh - 22px - 12px);
-        right: 12px;
+    .product-social {
+        margin-top: 12px;
+        margin-bottom: 12px;
+    }
+
+    .copyright-branding {
+        flex: 1;
+        width: 100vw;
+        margin-top: 8px;
+        margin-bottom: 8px;
+    }
+
+    .copyright-branding p {
+        color: gray;
+        font-size: 80%;
+        margin: 0;
+    }
+
+    .copyright-branding a {
+        text-decoration: none;
+        color: #0696b7;
     }
     </style>
 
@@ -222,7 +241,7 @@
         <div class="contents">
 
             <!-- Product title -->
-            <h2 class="product-title product-field">
+            <h2 class="product-title">
                 <?php echo $block->escapeHtml($product->getName()) ?>
             </h2>
 
@@ -290,7 +309,7 @@
             </form>
 
             <!-- Social links -->
-            <div id="social">
+            <div class="product-social">
                 <amp-social-share type="twitter"
                                   width="30"
                                   height="22"></amp-social-share>
@@ -307,6 +326,11 @@
                 <amp-social-share type="pinterest"
                                   width="33"
                                   height="22"></amp-social-share>
+            </div>
+
+            <!-- Copright/Branding -->
+            <div class="copyright-branding">
+                <p>Copyright (C) 2017 <a href="https://www.wompmobile.com/">WompMobile</a> and <a href="https://community.magento.com/t5/user/viewprofilepage/user-id/269">Alan Kent</a>.<br><a href="https://ampbyexample.com/samples_templates/product_page/">AMP Product Page Sample</a> used as reference.</p>
             </div>
 
         </div>
