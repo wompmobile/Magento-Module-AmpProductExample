@@ -3,6 +3,7 @@
 namespace AlanKent\AmpExample\Block;
 
 use Magento\Framework\App\Filesystem\DirectoryList;
+use Magento\Framework\Module\Dir;
 
 class AmpProductBlock extends \Magento\Framework\View\Element\Template
 {
@@ -21,6 +22,9 @@ class AmpProductBlock extends \Magento\Framework\View\Element\Template
     /** @var \Magento\Framework\Escaper */
     protected $_escaper;
 
+    /** @var \Magento\Framework\Module\Dir\Reader */
+    protected $moduleReader;
+
     /** @var \Magento\Framework\UrlInterface */
     protected $urlBuilder;
 
@@ -28,6 +32,7 @@ class AmpProductBlock extends \Magento\Framework\View\Element\Template
      * Constructor
      * @param \Magento\Framework\Data\Form\FormKey $formKey
      * @param \Magento\Framework\Escaper $escaper
+     * @param \Magento\Framework\Module\Dir\Reader $moduleReader
      * @param \Magento\Framework\UrlInterface $urlBuilder
      * @param \Magento\Framework\View\Element\Template\Context $context
      * @param \Magento\Catalog\Model\Category $categoryModel
@@ -36,6 +41,7 @@ class AmpProductBlock extends \Magento\Framework\View\Element\Template
     public function __construct(
         \Magento\Framework\Data\Form\FormKey $formKey,
         \Magento\Framework\Escaper $escaper,
+        \Magento\Framework\Module\Dir\Reader $moduleReader,
         \Magento\Framework\UrlInterface $urlBuilder,
         \Magento\Framework\View\Element\Template\Context $context,
         \Magento\Catalog\Model\Category $categoryModel,
@@ -43,6 +49,7 @@ class AmpProductBlock extends \Magento\Framework\View\Element\Template
     ) {
         $this->formKey = $formKey;
         $this->_escaper = $escaper;
+        $this->moduleReader = $moduleReader;
         $this->urlBuilder = $urlBuilder;
         parent::__construct($context);
         $this->categoryModel = $categoryModel;
@@ -193,7 +200,9 @@ class AmpProductBlock extends \Magento\Framework\View\Element\Template
             $values = array();
             $values[] = $this->getViewFileUrl('AlanKent_AmpExample::img/placeholder.jpg');
 
-            $imageDimensions = $this->getImageDimensions($galleryEntry);
+            $modulePath = $this->moduleReader->getModuleDir(Dir::MODULE_VIEW_DIR, "AlanKent_AmpExample");
+            $filePath = $modulePath . '/frontend/web/img/placeholder.jpg';
+            $imageDimensions = getimagesize($filePath);
             $values[] = $imageDimensions[0];
             $values[] = $imageDimensions[1];
 
