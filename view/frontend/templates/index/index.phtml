@@ -1,3 +1,21 @@
+<?php
+/**
+ * Copyright 2017 WompMobile, Inc.
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *   http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
+?>
+
 <!doctype html>
 <?php
     $product = $block->getProduct();
@@ -227,14 +245,14 @@
         <div class="header">
             <a id="sample-menu" on="tap:drawermenu.toggle">
                 <amp-img srcset="<?php
-                        echo $block->getViewFileUrl('AlanKent_AmpExample::img/ic_menu_white_1x_web_24dp.png')
+                        echo $block->getViewFileUrl('WompMobile_AmpProductExample::img/ic_menu_white_1x_web_24dp.png')
                     ?> 1x, <?php
-                        echo $block->getViewFileUrl('AlanKent_AmpExample::img/ic_menu_white_2x_web_24dp.png')
+                        echo $block->getViewFileUrl('WompMobile_AmpProductExample::img/ic_menu_white_2x_web_24dp.png')
                     ?> 2x" width="24" height="24" alt="navigation">
                 </amp-img>
             </a>
             <a id="sample-logo" href="#">
-                Magento &amp; WompMobile &hearts; AMP
+                WompMobile &hearts; AMP
             </a>
         </div>
 
@@ -330,7 +348,10 @@
 
             <!-- Copright/Branding -->
             <div class="copyright-branding">
-                <p>Copyright (C) 2017 <a href="https://www.wompmobile.com/">WompMobile</a> and <a href="https://community.magento.com/t5/user/viewprofilepage/user-id/269">Alan Kent</a>.<br><a href="https://ampbyexample.com/samples_templates/product_page/">AMP Product Page Sample</a> used as reference.</p>
+                <p>
+                    Copyright 2017 <a href="http://www.wompmobile.com/">WompMobile, Inc.</a><br>
+                    <a href="https://ampbyexample.com/samples_templates/product_page/">AMP Product Page Sample</a> used as reference.
+                </p>
             </div>
 
         </div>

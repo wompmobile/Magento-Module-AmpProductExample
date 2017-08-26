@@ -1,11 +1,21 @@
 <?php
 /**
- * Product controller.
+ * Copyright 2017 WompMobile, Inc.
  *
- * Copyright c 2015 Magento. All rights reserved.
- * See COPYING.txt for license details.
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *   http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
  */
-namespace AlanKent\AmpExample\Controller\Index;
+
+namespace WompMobile\AmpProductExample\Controller\Index;
 
 class Index extends \Magento\Framework\App\Action\Action
 {
@@ -41,9 +51,9 @@ class Index extends \Magento\Framework\App\Action\Action
         $layout = $this->_view->getLayout();
 
         /** @var \Foo\Bar\Block\Popin\Content $block */
-        $block = $layout->createBlock(\AlanKent\AmpExample\Block\AmpProductBlock::class);
+        $block = $layout->createBlock(\WompMobile\AmpProductExample\Block\AmpProductBlock::class);
         $block->getProductParam();
-        $block->setTemplate('AlanKent_AmpExample::index/index.phtml');
+        $block->setTemplate('WompMobile_AmpProductExample::index/index.phtml');
 
         $result = $this->rawResultFactory->create();
         $result->setHeader('Content-Type', 'text/html');

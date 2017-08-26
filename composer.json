@@ -1,10 +1,12 @@
 {
-    "name": "alankent/module-amp-example",
-    "description": "AMP Example Magento Module (experimental)",
+    "name": "wompmobile/amp-product-example",
+    "description": "AMP Product Example Module for Magento 2.x",
     "type": "magento2-module",
-    "version": "0.0.1",
+    "version": "1.0",
+    "license": [
+        "Apache-2.0"
+    ],
     "require": {
-        "alankent/module-amp": "*",
         "php": ">=5.2.0"
     },
     "autoload": {
@@ -12,7 +14,7 @@
             "registration.php"
         ],
         "psr-4": {
-            "AlanKent\\AmpExample\\": ""
+            "WompMobile\\AmpProductExample\\": ""
         }
     }
 }
