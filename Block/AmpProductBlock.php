@@ -28,6 +28,9 @@ class AmpProductBlock extends \Magento\Framework\View\Element\Template
     /** @var \Magento\Catalog\Api\ProductRepositoryInterface */
     protected $productRepo;
 
+    /** @var \Magento\Catalog\Helper\Product */
+    protected $productHelper;
+
     /** @var \Magento\Catalog\Model\Category */
     protected $categoryModel;
 
@@ -46,6 +49,7 @@ class AmpProductBlock extends \Magento\Framework\View\Element\Template
     /**
      * Constructor
      * @param \Magento\Catalog\Api\ProductRepositoryInterface $productRepo
+     * @param \Magento\Catalog\Helper\Product $productHelper
      * @param \Magento\Catalog\Model\Category $categoryModel
      * @param \Magento\Framework\Data\Form\FormKey $formKey
      * @param \Magento\Framework\Escaper $escaper
@@ -55,6 +59,7 @@ class AmpProductBlock extends \Magento\Framework\View\Element\Template
      */
     public function __construct(
         \Magento\Catalog\Api\ProductRepositoryInterface $productRepo,
+        \Magento\Catalog\Helper\Product $productHelper,
         \Magento\Catalog\Model\Category $categoryModel,
         \Magento\Framework\Data\Form\FormKey $formKey,
         \Magento\Framework\Escaper $escaper,
@@ -63,6 +68,7 @@ class AmpProductBlock extends \Magento\Framework\View\Element\Template
         \Magento\Framework\View\Element\Template\Context $context
     ) {
         $this->productRepo = $productRepo;
+        $this->productHelper = $productHelper;
         $this->categoryModel = $categoryModel;
         $this->formKey = $formKey;
         $this->escaper = $escaper;
@@ -101,12 +107,7 @@ class AmpProductBlock extends \Magento\Framework\View\Element\Template
 
     public function getProductImageUrl()
     {
-        $url = "";
-        $attribute = $this->product->getResource()->getAttribute('image');
-        if ($this->product->getImage() && $attribute) {
-            $url = $attribute->getFrontend()->getUrl($this->product);
-        }
-        return $url;
+        return $this->productHelper->getImageUrl($this->product);
     }
 
     private function getCategoriesInfo()
