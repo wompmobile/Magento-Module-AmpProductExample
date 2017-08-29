@@ -213,10 +213,10 @@ class AmpProductBlock extends \Magento\Framework\View\Element\Template
         // Provide placeholder image if no gallery images
         if (count($galleryInfo) < 1) {
             $values = array();
-            $values[] = $this->getViewFileUrl('WompMobile_AmpProductExample::img/placeholder.jpg');
+            $values[] = $this->getViewFileUrl('Magento_Catalog::images/product/placeholder/image.jpg');
 
-            $modulePath = $this->moduleReader->getModuleDir(Dir::MODULE_VIEW_DIR, "WompMobile_AmpProductExample");
-            $filePath = $modulePath . '/frontend/web/img/placeholder.jpg';
+            $modulePath = $this->moduleReader->getModuleDir(Dir::MODULE_VIEW_DIR, "Magento_Catalog");
+            $filePath = $modulePath . '/base/web/images/product/placeholder/image.jpg';
             $imageDimensions = getimagesize($filePath);
             $values[] = $imageDimensions[0];
             $values[] = $imageDimensions[1];
