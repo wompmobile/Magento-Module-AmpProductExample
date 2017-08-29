@@ -14,20 +14,48 @@ To demonstrate...
 
 ## Installation
 
-### Clone the repository
-Clone the [AmpProductExample](https://github.com/wompmobile/Magento-Module-AmpProductExample) repository into `<magento_install_dir>/app/code/WompMobile/AmpProductExample`, where `<magento_install_dir>` should be replaced with the path to your Magento 2.x installation directory.
+### Option 1: Using composer
 
-### Update the Magento database and schema
-Run the following command to register the module:
+1. Update `composer.json` at the root of your Magento 2.x installation directory:
 
-    php <magento_install_dir>/bin/magento setup:upgrade
+    a. Add the following to the `repositories` array:
 
-### Verify the module is installed
-Enter the following command:
+        {
+            "type": "vcs",
+            "url":  "git@github.com:wompmobile/Magento-Module-AmpProductExample.git"
+        }
 
-    php <magento_install_dir>/bin/magento module:status
+    b. Add the following to the `require` object:
 
-If installation was successful, `WompMobile_AmpProductExample` will appear under the `List of enabled modules`.
+        "wompmobile/AmpProductExample": "dev-master"
+
+1. Fetch the module:
+
+        composer update wompmobile/AmpProductExample
+
+1. Register the module:
+
+        magento setup:upgrade
+
+1. Verify the module is installed:
+
+        magento module:status
+
+    If installation was successful, `WompMobile_AmpProductExample` will appear under the `List of enabled modules`.
+
+### Option 2: Manual installation
+
+1. Clone [github.com/wompmobile/Magento-Module-AmpProductExample](https://github.com/wompmobile/Magento-Module-AmpProductExample) into `<magento_install_dir>/app/code/WompMobile/AmpProductExample`, where `<magento_install_dir>` should be replaced with the path to your Magento 2.x installation directory.
+
+1. Register the module:
+
+        magento setup:upgrade
+
+1. Verify the module is installed:
+
+        magento module:status
+
+    If installation was successful, `WompMobile_AmpProductExample` will appear under the `List of enabled modules`.
 
 ## Usage
 
