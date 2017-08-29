@@ -1,5 +1,5 @@
 {
-    "name": "wompmobile/AmpProductExample",
+    "name": "wompmobile/module-amp-product-example",
     "description": "AMP Product Example Module for Magento 2.x",
     "type": "magento2-module",
     "version": "1.0",

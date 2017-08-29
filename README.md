@@ -27,11 +27,11 @@ To demonstrate...
 
     b. Add the following to the `require` object:
 
-        "wompmobile/AmpProductExample": "dev-master"
+        "wompmobile/module-amp-product-example": "dev-master"
 
 1. Fetch the module:
 
-        composer update wompmobile/AmpProductExample
+        composer update wompmobile/module-amp-product-example
 
 1. Register the module:
 
@@ -45,7 +45,7 @@ To demonstrate...
 
 ### Option 2: Manual installation
 
-1. Clone [github.com/wompmobile/Magento-Module-AmpProductExample](https://github.com/wompmobile/Magento-Module-AmpProductExample) into `<magento_install_dir>/app/code/WompMobile/AmpProductExample`, where `<magento_install_dir>` should be replaced with the path to your Magento 2.x installation directory.
+1. Clone [github.com/wompmobile/Magento-Module-AmpProductExample](https://github.com/wompmobile/Magento-Module-AmpProductExample) into `<magento_install_dir>/app/code/wompmobile/module-amp-product-example`, where `<magento_install_dir>` should be replaced with the path to your Magento 2.x installation directory.
 
 1. Register the module:
 
