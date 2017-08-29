@@ -22,20 +22,20 @@ use Magento\Framework\Module\Dir;
 
 class AmpProductBlock extends \Magento\Framework\View\Element\Template
 {
-    /** @var \Magento\Catalog\Model\Category */
-    protected $categoryModel;
-
-    /** @var \Magento\Catalog\Api\ProductRepositoryInterface */
-    private $productRepo;
-
     /** @var \Magento\Catalog\Api\Data\ProductInterface */
     private $product;
+
+    /** @var \Magento\Catalog\Api\ProductRepositoryInterface */
+    protected $productRepo;
+
+    /** @var \Magento\Catalog\Model\Category */
+    protected $categoryModel;
 
     /** @var \Magento\Framework\Data\Form\FormKey */
     protected $formKey;
 
     /** @var \Magento\Framework\Escaper */
-    protected $_escaper;
+    protected $escaper;
 
     /** @var \Magento\Framework\Module\Dir\Reader */
     protected $moduleReader;
@@ -45,33 +45,34 @@ class AmpProductBlock extends \Magento\Framework\View\Element\Template
 
     /**
      * Constructor
+     * @param \Magento\Catalog\Api\ProductRepositoryInterface $productRepo
+     * @param \Magento\Catalog\Model\Category $categoryModel
      * @param \Magento\Framework\Data\Form\FormKey $formKey
      * @param \Magento\Framework\Escaper $escaper
      * @param \Magento\Framework\Module\Dir\Reader $moduleReader
      * @param \Magento\Framework\UrlInterface $urlBuilder
      * @param \Magento\Framework\View\Element\Template\Context $context
-     * @param \Magento\Catalog\Model\Category $categoryModel
-     * @param \Magento\Catalog\Api\ProductRepositoryInterface $productRepo
      */
     public function __construct(
+        \Magento\Catalog\Api\ProductRepositoryInterface $productRepo,
+        \Magento\Catalog\Model\Category $categoryModel,
         \Magento\Framework\Data\Form\FormKey $formKey,
         \Magento\Framework\Escaper $escaper,
         \Magento\Framework\Module\Dir\Reader $moduleReader,
         \Magento\Framework\UrlInterface $urlBuilder,
-        \Magento\Framework\View\Element\Template\Context $context,
-        \Magento\Catalog\Model\Category $categoryModel,
-        \Magento\Catalog\Api\ProductRepositoryInterface $productRepo
+        \Magento\Framework\View\Element\Template\Context $context
     ) {
+        $this->productRepo = $productRepo;
+        $this->categoryModel = $categoryModel;
         $this->formKey = $formKey;
-        $this->_escaper = $escaper;
+        $this->escaper = $escaper;
         $this->moduleReader = $moduleReader;
         $this->urlBuilder = $urlBuilder;
         parent::__construct($context);
-        $this->categoryModel = $categoryModel;
-        $this->productRepo = $productRepo;
     }
 
-    public function getProductParam() {
+    public function getProductParam()
+    {
         $sku = $_GET["sku"];
         if ($sku === "") {
             throw new \Exception("Product SKU missing.");
@@ -83,15 +84,18 @@ class AmpProductBlock extends \Magento\Framework\View\Element\Template
         }
     }
 
-    public function getProduct() {
+    public function getProduct()
+    {
         return $this->product;
     }
 
-    public function getProductId() {
+    public function getProductId()
+    {
         return $this->product->getId();
     }
 
-    public function getProductPrice() {
+    public function getProductPrice()
+    {
         return number_format($this->product->getPrice(), 2, null, '');
     }
 
@@ -183,7 +187,7 @@ class AmpProductBlock extends \Magento\Framework\View\Element\Template
 
     public function escapeHtml($html, $allowedTags = NULL)
     {
-        return $this->_escaper->escapeHtml($html, $allowedTags);
+        return $this->escaper->escapeHtml($html, $allowedTags);
     }
 
     public function getProductGalleryInfo()
