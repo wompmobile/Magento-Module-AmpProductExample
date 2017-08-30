@@ -105,6 +105,11 @@ class AmpProductBlock extends \Magento\Framework\View\Element\Template
         return number_format($this->product->getPrice(), 2, null, '');
     }
 
+    public function getProductCanonicalUrl()
+    {
+        return $this->productHelper->getProductUrl($this->product);
+    }
+
     public function getProductImageUrl()
     {
         return $this->productHelper->getImageUrl($this->product);
