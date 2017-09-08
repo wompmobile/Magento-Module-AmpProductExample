@@ -37,14 +37,8 @@ class AmpProductBlock extends \Magento\Framework\View\Element\Template
     /** @var \Magento\Framework\Data\Form\FormKey */
     protected $formKey;
 
-    /** @var \Magento\Framework\Escaper */
-    protected $escaper;
-
     /** @var \Magento\Framework\Module\Dir\Reader */
     protected $moduleReader;
-
-    /** @var \Magento\Framework\UrlInterface */
-    protected $urlBuilder;
 
     /**
      * Constructor
@@ -52,29 +46,28 @@ class AmpProductBlock extends \Magento\Framework\View\Element\Template
      * @param \Magento\Catalog\Helper\Product $productHelper
      * @param \Magento\Catalog\Model\Category $categoryModel
      * @param \Magento\Framework\Data\Form\FormKey $formKey
-     * @param \Magento\Framework\Escaper $escaper
      * @param \Magento\Framework\Module\Dir\Reader $moduleReader
-     * @param \Magento\Framework\UrlInterface $urlBuilder
      * @param \Magento\Framework\View\Element\Template\Context $context
+     * @param array $data
      */
     public function __construct(
         \Magento\Catalog\Api\ProductRepositoryInterface $productRepo,
         \Magento\Catalog\Helper\Product $productHelper,
         \Magento\Catalog\Model\Category $categoryModel,
         \Magento\Framework\Data\Form\FormKey $formKey,
-        \Magento\Framework\Escaper $escaper,
         \Magento\Framework\Module\Dir\Reader $moduleReader,
-        \Magento\Framework\UrlInterface $urlBuilder,
-        \Magento\Framework\View\Element\Template\Context $context
+        \Magento\Framework\View\Element\Template\Context $context,
+        array $data = []
     ) {
         $this->productRepo = $productRepo;
         $this->productHelper = $productHelper;
         $this->categoryModel = $categoryModel;
         $this->formKey = $formKey;
-        $this->escaper = $escaper;
         $this->moduleReader = $moduleReader;
-        $this->urlBuilder = $urlBuilder;
-        parent::__construct($context);
+        parent::__construct(
+            $context,
+            $data
+        );
     }
 
     /**
@@ -252,7 +245,7 @@ class AmpProductBlock extends \Magento\Framework\View\Element\Template
      */
     public function escapeHtml($html, $allowedTags = NULL)
     {
-        return $this->escaper->escapeHtml($html, $allowedTags);
+        return $this->_escaper->escapeHtml($html, $allowedTags);
     }
 
     /**
@@ -326,7 +319,7 @@ class AmpProductBlock extends \Magento\Framework\View\Element\Template
      */
     public function getImageUrl($galleryEntry)
     {
-        $mediaUrl = $this->urlBuilder->getBaseUrl(['_type' => \Magento\Framework\UrlInterface::URL_TYPE_MEDIA]);
+        $mediaUrl = $this->_urlBuilder->getBaseUrl(['_type' => \Magento\Framework\UrlInterface::URL_TYPE_MEDIA]);
         $mediaUrl .= 'catalog/product';
 
         return $mediaUrl . $galleryEntry->getFile();
