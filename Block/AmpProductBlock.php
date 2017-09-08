@@ -77,6 +77,12 @@ class AmpProductBlock extends \Magento\Framework\View\Element\Template
         parent::__construct($context);
     }
 
+    /**
+     * Get product SKU from URL
+     * Example: http://domain.com/amp/?sku=abc will retrieve the product with SKU 'abc'
+     *
+     * @return string
+     */
     public function getProductParam()
     {
         $sku = $_GET["sku"];
@@ -90,31 +96,64 @@ class AmpProductBlock extends \Magento\Framework\View\Element\Template
         }
     }
 
+    /**
+     * Get product
+     *
+     * @return ProductInterface
+     */
     public function getProduct()
     {
         return $this->product;
     }
 
+    /**
+     * Product id
+     *
+     * @return int|null
+     */
     public function getProductId()
     {
         return $this->product->getId();
     }
 
+    /**
+     * Product price (formatted number)
+     * Example: float 1111.55555 becomes 1111.56
+     *
+     * @return string
+     */
     public function getProductPrice()
     {
         return number_format($this->product->getPrice(), 2, null, '');
     }
 
+    /**
+     * Canonical URL to product
+     * Reference: https://www.ampproject.org/docs/guides/discovery
+     *
+     * @return string|bool
+     */
     public function getProductCanonicalUrl()
     {
         return $this->productHelper->getProductUrl($this->product);
     }
 
+    /**
+     * Retrieve base image url
+     *
+     * @return string|bool
+     */
     public function getProductImageUrl()
     {
         return $this->productHelper->getImageUrl($this->product);
     }
 
+    /**
+     * Get basic information about all categories in an associative array:
+     *  int 'id', string 'name', string 'url', int 'level', array 'children'
+     *
+     * @return array
+     */
     private function getCategoriesInfo()
     {
         $category = $this->categoryModel;
@@ -149,6 +188,14 @@ class AmpProductBlock extends \Magento\Framework\View\Element\Template
         return $categoriesInfo;
     }
 
+    /**
+     * Generate AMP HTML markup for all children categories of a parent category
+     *
+     * @param array $categoriesInfo
+     * @param array $children
+     * @param int $level
+     * @return array
+     */
     private function generateChildCategoriesHTML($categoriesInfo, $children, $level)
     {
         if (!$children) {
@@ -171,7 +218,12 @@ class AmpProductBlock extends \Magento\Framework\View\Element\Template
         return $html;
     }
 
-    // TODO: This is not efficient
+    /**
+     * Generate AMP HTML markup for all categories
+     * TODO: This is not efficient
+     *
+     * @return string
+     */
     public function generateCategoriesHTML()
     {
         $html = "";
@@ -191,11 +243,24 @@ class AmpProductBlock extends \Magento\Framework\View\Element\Template
         return $html;
     }
 
+    /**
+     * Escape html entities
+     *
+     * @param  string|array $data
+     * @param  array $allowedTags
+     * @return string|array
+     */
     public function escapeHtml($html, $allowedTags = NULL)
     {
         return $this->escaper->escapeHtml($html, $allowedTags);
     }
 
+    /**
+     * Get basic information about product media gallery images in an associative array:
+     *  string 'url', int 'width', int 'height'
+     *
+     * @return array
+     */
     public function getProductGalleryInfo()
     {
         $galleryEntries = $this->product->getMediaGalleryEntries();
@@ -237,6 +302,12 @@ class AmpProductBlock extends \Magento\Framework\View\Element\Template
         return $galleryInfo;
     }
 
+    /**
+     * Determine whether a product media gallery entry is an image
+     *
+     * @param  \Magento\Catalog\Api\Data\ProductAttributeMediaGalleryEntryInterface $galleryEntry
+     * @return bool
+     */
     public function isImage($galleryEntry)
     {
         $mediaDir = $this->_filesystem->getDirectoryRead(DirectoryList::MEDIA);
@@ -247,6 +318,12 @@ class AmpProductBlock extends \Magento\Framework\View\Element\Template
         return @is_array(getimagesize($absolutePath));
     }
 
+    /**
+     * Get URL to image in product media gallery
+     *
+     * @param  \Magento\Catalog\Api\Data\ProductAttributeMediaGalleryEntryInterface $galleryEntry
+     * @return string
+     */
     public function getImageUrl($galleryEntry)
     {
         $mediaUrl = $this->urlBuilder->getBaseUrl(['_type' => \Magento\Framework\UrlInterface::URL_TYPE_MEDIA]);
@@ -255,6 +332,13 @@ class AmpProductBlock extends \Magento\Framework\View\Element\Template
         return $mediaUrl . $galleryEntry->getFile();
     }
 
+    /**
+     * Get dimensions of image in product media gallery
+     * Example: [width, height]
+     *
+     * @param  \Magento\Catalog\Api\Data\ProductAttributeMediaGalleryEntryInterface $galleryEntry
+     * @return array
+     */
     public function getImageDimensions($galleryEntry)
     {
         $mediaDir = $this->_filesystem->getDirectoryRead(DirectoryList::MEDIA);
@@ -269,6 +353,11 @@ class AmpProductBlock extends \Magento\Framework\View\Element\Template
         return [0, 0];
     }
 
+    /**
+     * Retrieve Session Form Key
+     *
+     * @return string
+     */
     public function getFormKey() {
         return $this->formKey->getFormKey();
     }
